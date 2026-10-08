@@ -1,0 +1,299 @@
+@import './variables.css';
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--pm-font-family);
+  background-color: var(--pm-bg-white);
+  color: var(--pm-text-body);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--pm-bg-white);
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   WORDPRESS-FRIENDLY LAYOUT PRIMITIVES
+   ========================================================================== */
+.pm-section {
+  width: 100%;
+  position: relative;
+  padding-top: clamp(60px, 8vw, 110px);
+  padding-bottom: clamp(60px, 8vw, 110px);
+}
+
+.pm-container {
+  width: 100%;
+  max-width: var(--pm-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--pm-gutter);
+  padding-right: var(--pm-gutter);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+.pm-display-xl {
+  font-size: clamp(2.6rem, 5.5vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--pm-text-ink);
+}
+
+.pm-display-lg {
+  font-size: clamp(2.1rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--pm-text-ink);
+}
+
+.pm-display-md {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--pm-text-ink);
+}
+
+.pm-text-standfirst {
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 400;
+  color: var(--pm-text-muted);
+  line-height: 1.55;
+}
+
+.pm-gradient-text {
+  background: var(--pm-brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.pm-hero-gradient-text {
+  background: var(--pm-hero-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.pm-metric-gradient-text {
+  background: var(--pm-metric-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.pm-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--pm-cta-gradient);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: var(--pm-radius-pill);
+  box-shadow: 0 4px 14px rgba(0, 114, 255, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+}
+
+.pm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--pm-cta-hover-shadow);
+}
+
+.pm-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pm-bg-gray);
+  color: var(--pm-blue);
+  border: 1px solid var(--pm-border-btn);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: var(--pm-radius-pill);
+  transition: var(--pm-transition);
+  white-space: nowrap;
+}
+
+.pm-btn-secondary:hover {
+  background: #ffffff;
+  border-color: var(--pm-blue);
+  color: var(--pm-blue-dark);
+  transform: translateY(-2px);
+}
+
+.pm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pm-blue-badge-bg);
+  border: 1px solid var(--pm-blue-badge-border);
+  padding: 6px 16px;
+  border-radius: var(--pm-radius-pill);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pm-blue);
+  width: fit-content;
+}
+
+/* ==========================================================================
+   PURE CSS MARQUEE (WORDPRESS-CONVERTIBLE)
+   ========================================================================== */
+.pm-marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.pm-marquee-fade-left,
+.pm-marquee-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.pm-marquee-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--pm-bg-white), transparent);
+}
+
+.pm-marquee-fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--pm-bg-white), transparent);
+}
+
+.pm-marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: pm-marquee-scroll 35s linear infinite;
+}
+
+.pm-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pm-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================================================
+   TESTIMONIALS & VIDEO PLAYERS
+   ========================================================================== */
+.pm-video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--pm-radius-lg);
+  overflow: hidden;
+  background: #0b0d1a;
+}
+
+.pm-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pm-video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.pm-video-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  transition: background 0.2s ease;
+}
+
+.pm-video-play-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.pm-video-play-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--pm-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease;
+}
+
+.pm-video-play-btn:hover .pm-video-play-icon {
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
